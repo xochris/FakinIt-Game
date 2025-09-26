@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dsssp85ew4pc3"]
+
+[ext_resource type="FontFile" uid="uid://ogibjvkoc346" path="res://Assets/Fonts/Crisper.ttf" id="1_ncytp"]
+
+[resource]
+base_font = ExtResource("1_ncytp")

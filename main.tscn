@@ -1,0 +1,194 @@
+[gd_scene load_steps=2 format=3 uid="uid://chkeepbueopt7"]
+
+[ext_resource type="Script" uid="uid://5ero1eg207yg" path="res://control(root).gd" id="1_ig7tw"]
+
+[node name="Control (ROOT)" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="MainMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.0477, 0.0477, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "PLAY"
+
+[node name="HTP Button" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "HOW TO PLAY"
+
+[node name="Quit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="HowToPlay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="colorrecttemp" type="ColorRect" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.0477, 0.0477, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay"]
+layout_mode = 1
+offset_left = 1.0
+offset_right = 97.0
+offset_bottom = 35.0
+
+[node name="Back" type="Button" parent="HowToPlay/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlay"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -50.5
+offset_right = 1235.0
+offset_bottom = 50.5
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HowToPlay/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Question Mode:
+Answer the question as best you can. 
+One or more players will have a different question from the rest of the group. 
+If your question is different from the main question, you are the imposter and must blend in as best you can!"
+
+[node name="Host" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="colorrecttemp" type="ColorRect" parent="Host"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.0477, 0.0477, 1)
+
+[node name="VScrollBar" type="VScrollBar" parent="Host"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host" type="Button" parent="Host/VScrollBar"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 104.0
+offset_right = 748.0
+offset_bottom = 263.0
+text = "Host"
+
+[node name="Join" type="Button" parent="Host/VScrollBar"]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 297.0
+offset_right = 747.0
+offset_bottom = 456.0
+text = "Join"
+
+[node name="GameSettings" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="colorrecttemp" type="ColorRect" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.0477, 0.0477, 1)
+
+[node name="VScrollBar" type="VScrollBar" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="GameSettings/VScrollBar"]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 60.0
+offset_right = 719.0
+offset_bottom = 180.0
+text = "Imposter Count"
+
+[node name="Button2" type="Button" parent="GameSettings/VScrollBar"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 408.0
+offset_right = 709.0
+offset_bottom = 535.0
+text = "START GAME"
+
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HTP Button" to="." method="_on_htp_button_pressed"]
+[connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Host/VScrollBar/Host" to="." method="_on_host_pressed"]
