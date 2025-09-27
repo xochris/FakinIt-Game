@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://carcjavwg7h42"]
+
+[ext_resource type="Script" uid="uid://be0cbdt5t4gg8" path="res://poly_bg.gd" id="1_kayw1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kayw1"]
+size = Vector2(1156, 655)
+
+[node name="PolyBG" type="Node2D"]
+script = ExtResource("1_kayw1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
+
+[node name="PlayArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(1, -1.5)
+shape = SubResource("RectangleShape2D_kayw1")
+
+[connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]

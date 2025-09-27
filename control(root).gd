@@ -43,3 +43,7 @@ func _on_host_pressed():
 	if main_menu and host:
 		main_menu.visible = false
 		game_settings.visible = true
+
+# Starts Game Scene :D
+func _on_start_game_pressed():
+	get_tree().change_scene_to_file("res://FakinIt.tscn")

@@ -170,7 +170,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="GameSettings/VScrollBar"]
+[node name="ImposterCount" type="Button" parent="GameSettings/VScrollBar"]
 layout_mode = 0
 offset_left = 435.0
 offset_top = 60.0
@@ -178,13 +178,17 @@ offset_right = 719.0
 offset_bottom = 180.0
 text = "Imposter Count"
 
-[node name="Button2" type="Button" parent="GameSettings/VScrollBar"]
+[node name="StartGame" type="Button" parent="GameSettings/VScrollBar"]
 layout_mode = 0
-offset_left = 461.0
-offset_top = 408.0
-offset_right = 709.0
-offset_bottom = 535.0
+offset_left = 506.0
+offset_top = 458.0
+offset_right = 629.0
+offset_bottom = 482.0
 text = "START GAME"
+
+[node name="Node2D" type="Node2D" parent="GameSettings/VScrollBar/StartGame"]
+
+[node name="Polygon2D" type="Polygon2D" parent="GameSettings/VScrollBar/StartGame/Node2D"]
 
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HTP Button" to="." method="_on_htp_button_pressed"]
@@ -192,3 +196,4 @@ text = "START GAME"
 [connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="Host/VScrollBar/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="GameSettings/VScrollBar/StartGame" to="." method="_on_start_game_pressed"]
