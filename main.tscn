@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://chkeepbueopt7"]
+[gd_scene load_steps=17 format=3 uid="uid://chkeepbueopt7"]
 
 [ext_resource type="Script" uid="uid://5ero1eg207yg" path="res://control(root).gd" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://b3y6xrjs6lhky" path="res://Assets/Fonts/Expose-Regular.otf" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://213lwa3codvu" path="res://poly_1.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://d4aqthqpk7rme" path="res://back.gd" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://pawg6kblbb1b" path="res://poly_2.gd" id="4_1bvp3"]
+[ext_resource type="Shader" uid="uid://bt2ht36phm4jp" path="res://shadingSpy.gdshader" id="4_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bcgmmwec6v7bj" path="res://Assets/PNG Images/WORDMODE.png" id="5_4c57u"]
+[ext_resource type="Texture2D" uid="uid://clk8ws8fiq70e" path="res://Assets/PNG Images/spypng.png" id="6_efxa6"]
+[ext_resource type="Script" uid="uid://cq3lh1bm1agyi" path="res://spypng.gd" id="7_dg77c"]
+[ext_resource type="Texture2D" uid="uid://drw2aowovbc07" path="res://Assets/PNG Images/Question Mode.png" id="8_efxa6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1bvp3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lquwl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mycd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_272bh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = ExtResource("4_4c57u")
+shader_parameter/base_gray = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/pulse_speed = 2.0
+shader_parameter/threshold = 0.1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2yge"]
 
 [node name="Control (ROOT)" type="Control"]
 layout_mode = 3
@@ -17,40 +42,50 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.09, 0.0477, 0.0477, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.5
+offset_top = -199.0
+offset_right = 163.5
+offset_bottom = 199.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
 layout_mode = 2
+theme_override_constants/separation = 64
 
 [node name="Play" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 128
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1bvp3")
 text = "PLAY"
 
 [node name="HTP Button" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lquwl")
 text = "HOW TO PLAY"
 
 [node name="Quit" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7mycd")
 text = "QUIT
 "
 
@@ -63,43 +98,39 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="colorrecttemp" type="ColorRect" parent="HowToPlay"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.09, 0.0477, 0.0477, 1)
-
 [node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay"]
 layout_mode = 1
 offset_left = 1.0
 offset_right = 97.0
 offset_bottom = 35.0
 
-[node name="Back" type="Button" parent="HowToPlay/VBoxContainer"]
+[node name="HTP_Back" type="Button" parent="HowToPlay/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.8352941, 0.36862746, 0, 1)
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_272bh")
 text = "Back"
+script = ExtResource("3_lquwl")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlay"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -50.5
-offset_right = 1235.0
-offset_bottom = 50.5
-grow_vertical = 2
+[node name="Spypng" type="Sprite2D" parent="HowToPlay"]
+material = SubResource("ShaderMaterial_dg77c")
+position = Vector2(131, 447.99997)
+scale = Vector2(0.21111035, 0.21111028)
+texture = ExtResource("6_efxa6")
+script = ExtResource("7_dg77c")
 
-[node name="Label" type="Label" parent="HowToPlay/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Question Mode:
-Answer the question as best you can. 
-One or more players will have a different question from the rest of the group. 
-If your question is different from the main question, you are the imposter and must blend in as best you can!"
+[node name="Wordmode" type="Sprite2D" parent="HowToPlay"]
+position = Vector2(552.56506, 339.98203)
+rotation = 0.06981317
+scale = Vector2(0.9997907, 0.9997908)
+texture = ExtResource("5_4c57u")
+
+[node name="QuestionMode" type="Sprite2D" parent="HowToPlay"]
+position = Vector2(519.4428, 169.49661)
+rotation = -0.18325956
+scale = Vector2(1.0179656, 1.0179656)
+texture = ExtResource("8_efxa6")
 
 [node name="Host" type="Control" parent="."]
 visible = false
@@ -110,42 +141,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="colorrecttemp" type="ColorRect" parent="Host"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Host"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -164.0
+offset_right = 105.0
+offset_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.09, 0.0477, 0.0477, 1)
+theme_override_constants/separation = 128
 
-[node name="VScrollBar" type="VScrollBar" parent="Host"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 1.0
-offset_bottom = 179.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Host" type="Button" parent="Host/VScrollBar"]
-layout_mode = 0
-offset_left = 446.0
-offset_top = 104.0
-offset_right = 748.0
-offset_bottom = 263.0
+[node name="Host" type="Button" parent="Host/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 128
 text = "Host"
 
-[node name="Join" type="Button" parent="Host/VScrollBar"]
+[node name="Join" type="Button" parent="Host/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 128
+text = "JOIN"
+
+[node name="Host_Back" type="Button" parent="Host"]
 layout_mode = 0
-offset_left = 445.0
-offset_top = 297.0
-offset_right = 747.0
-offset_bottom = 456.0
-text = "Join"
+offset_right = 53.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0.8352941, 0.36862746, 0, 1)
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_272bh")
+text = "Back"
+script = ExtResource("3_lquwl")
 
 [node name="GameSettings" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,24 +188,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="colorrecttemp" type="ColorRect" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.09, 0.0477, 0.0477, 1)
-
-[node name="VScrollBar" type="VScrollBar" parent="GameSettings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ImposterCount" type="Button" parent="GameSettings/VScrollBar"]
+[node name="ImposterCount" type="Button" parent="GameSettings"]
 layout_mode = 0
 offset_left = 435.0
 offset_top = 60.0
@@ -178,22 +196,46 @@ offset_right = 719.0
 offset_bottom = 180.0
 text = "Imposter Count"
 
-[node name="StartGame" type="Button" parent="GameSettings/VScrollBar"]
-layout_mode = 0
-offset_left = 506.0
-offset_top = 458.0
-offset_right = 629.0
-offset_bottom = 482.0
+[node name="Button Container" type="Control" parent="GameSettings"]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartGame" type="Button" parent="GameSettings/Button Container"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 399.5
+offset_top = 474.0
+offset_right = 712.5
+offset_bottom = 559.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_0xm2m")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2yge")
 text = "START GAME"
 
-[node name="Node2D" type="Node2D" parent="GameSettings/VScrollBar/StartGame"]
+[node name="Node2D" type="Node2D" parent="GameSettings/Button Container/StartGame"]
 
-[node name="Polygon2D" type="Polygon2D" parent="GameSettings/VScrollBar/StartGame/Node2D"]
+[node name="Poly1" type="Polygon2D" parent="GameSettings/Button Container/StartGame/Node2D"]
+color = Color(0.8352941, 0.36862746, 0, 1)
+texture_scale = Vector2(0, 0)
+script = ExtResource("3_h2yge")
+
+[node name="Poly2" type="Polygon2D" parent="GameSettings/Button Container/StartGame/Node2D"]
+color = Color(0, 0.44705883, 0.69803923, 1)
+script = ExtResource("4_1bvp3")
 
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/HTP Button" to="." method="_on_htp_button_pressed"]
 [connection signal="pressed" from="MainMenu/CenterContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HowToPlay/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="Host/VScrollBar/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="GameSettings/VScrollBar/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/HTP_Back" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HowToPlay/VBoxContainer/HTP_Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Host/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Host/Host_Back" to="." method="_on_host_back_pressed"]
+[connection signal="pressed" from="GameSettings/Button Container/StartGame" to="." method="_on_start_game_pressed"]

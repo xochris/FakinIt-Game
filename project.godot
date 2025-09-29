@@ -14,9 +14,13 @@ config/name="Fakin' It"
 run/main_scene="uid://chkeepbueopt7"
 config/features=PackedStringArray("4.5", "Mobile")
 
+[autoload]
+
+PolyBG="*res://Poly_BG.tscn"
+
 [gui]
 
-theme/custom_font="uid://dsssp85ew4pc3"
+theme/custom_font="uid://b3y6xrjs6lhky"
 
 [rendering]
 

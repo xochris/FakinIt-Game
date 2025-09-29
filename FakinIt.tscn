@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://c6xiy816fwntt"]
+[gd_scene load_steps=5 format=3 uid="uid://c6xiy816fwntt"]
+
+[ext_resource type="Script" uid="uid://da2lxcmetx54c" path="res://fakin_it.gd" id="1_ona3m"]
+[ext_resource type="Script" uid="uid://elvnpn44d51o" path="res://question_panel.gd" id="2_8eswh"]
+[ext_resource type="FontFile" uid="uid://b3y6xrjs6lhky" path="res://Assets/Fonts/Expose-Regular.otf" id="3_15yfx"]
+[ext_resource type="Script" uid="uid://fsa6b08t5ap3" path="res://rich_text_label.gd" id="4_15yfx"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -7,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ona3m")
 
 [node name="QuestionPanel" type="Control" parent="."]
 layout_mode = 1
@@ -15,21 +21,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_8eswh")
+
+[node name="QuestionLabel" type="CenterContainer" parent="QuestionPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2799976, 1.2799976)
+
+[node name="Display_Question" type="RichTextLabel" parent="QuestionPanel/QuestionLabel"]
+layout_mode = 2
+
+[node name="QuestionMark" type="Button" parent="QuestionPanel"]
+layout_mode = 1
+offset_right = 52.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("3_15yfx")
+theme_override_font_sizes/font_size = 32
+text = "?"
+
+[node name="Tap_to_Proceed" type="RichTextLabel" parent="QuestionPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.09616
+offset_top = -49.0
+offset_right = 80.09616
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 32
+text = "Tap to Proceed"
+script = ExtResource("4_15yfx")
+
+[node name="WordPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="AnswerPanel" type="Control" parent="."]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="RevealPanel" type="Control" parent="."]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="DiscussionPanel" type="Control" parent="."]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="QuestionPanel/QuestionMark" to="." method="_on_question_mark_pressed"]

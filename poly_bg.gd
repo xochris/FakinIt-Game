@@ -19,13 +19,18 @@ func _play_area_extents() -> Vector2:
 
 func _on_play_area_area_exited(area):
 	var extents := _play_area_extents()
+	var p: Vector2 = area.position
+	
+	if p.x < -extents.x:
+		p.x += extents.x * 2
+	elif p.x > extents.x:
+		p.x -= extents.x * 2
 
-	if area.position.x < -extents.x:
-		area.position.x = extents.x + abs(area.position.x + extents.x)
-	elif area.position.x > extents.x:
-		area.position.x = -extents - abs(area.position.x - extents.x)
+	if p.y < -extents.y:
+		p.y += extents.y * 2
+	elif p.y > extents.y:
+		p.y -= extents.y * 2
 
-	if area.position.y < -extents.y:
-		area.position.y = extents.y + abs(area.position.y + extents.y)
-	elif area.position.y > extents.y:
-		area.position.y = -extents.y + abs(area.position.y - extents.y)
+	area.position = p
+
+# Thanks to @binary_soup on YT for the guide!

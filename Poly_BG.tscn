@@ -7,14 +7,17 @@ size = Vector2(1156, 655)
 
 [node name="PolyBG" type="Node2D"]
 script = ExtResource("1_kayw1")
+rseed = 9
+num_dots = 97
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
+enabled = false
 
 [node name="PlayArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(1, -1.5)
+position = Vector2(580, 325)
 shape = SubResource("RectangleShape2D_kayw1")
 
 [connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]

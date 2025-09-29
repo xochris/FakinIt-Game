@@ -33,7 +33,7 @@ func _on_htp_button_pressed():
 func _on_quit_pressed():
 	get_tree().quit()
 
-# Back Button returns to previous scene
+# Back Button in How To Play Menu
 func _on_back_pressed():
 	if how_to_play and main_menu:
 		how_to_play.visible = false
@@ -42,8 +42,15 @@ func _on_back_pressed():
 func _on_host_pressed():
 	if main_menu and host:
 		main_menu.visible = false
+		host.visible = false
 		game_settings.visible = true
 
 # Starts Game Scene :D
 func _on_start_game_pressed():
 	get_tree().change_scene_to_file("res://FakinIt.tscn")
+
+# Back button in Host Menu
+func _on_host_back_pressed() -> void:
+	if host and main_menu:
+		host.visible = false
+		main_menu.visible = true
