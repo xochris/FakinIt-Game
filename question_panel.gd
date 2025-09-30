@@ -1,9 +1,10 @@
 extends Control
 
-var question_label: RichTextLabel = null
-var question_mark_button: Button = null
+# Find our questions
+@onready var question_label: RichTextLabel = get_node_or_null("QuestionPanel/QuestionLabel/Display_Question")
+@onready var question_mark_button: Button = get_node_or_null("QuestionPanel/QuestionMark")
 
-var current_is_imposter: bool = false
+var current_is_imposter: bool = false #check to see if player is imposter
 
 # Questions (player, imposter)
 var questions: Array = [
@@ -128,69 +129,39 @@ var questions: Array = [
 	"If you were a fruit, what kind of fruit would you be?"],
 
 	["If you became a substitute teacher, what class would you teach?",
-	"What class did you hate the most in school?"]
+	"What class did you hate the most in school?"],
+
+	["If your life was a movie, what genre would it be?",
+	"What genre of movie do you dislike?"]
 
 ]
 
-var current_question_index: int = -1
+var current_question_index: int = -1 # Tracks which question in the array was chosen, -1 = no question chosen.
 
 func _ready() -> void:
 	# Keep this panel hidden until the game controller calls start_game()
 	visible = false
 
-	# Try to locate the RichTextLabel under QuestionLabel. Your RichTextLabel
-	# may have a different name (for example 'Display_Question'), so we search
-	# the children to find the first RichTextLabel instance.
-	if has_node("QuestionLabel"):
+	# If the onready lookup didn't find your renamed node, try a fallback search
+	# This normally won't be needed if the RichTextLabel is named
+	# QuestionLabel/Display_Question (which is what you said you renamed it to).
+	if question_label == null and has_node("QuestionLabel"):
 		var qnode = get_node("QuestionLabel")
-		# shallow search first
 		for child in qnode.get_children():
 			if child is RichTextLabel:
 				question_label = child
 				break
-		# deep search fallback
-		if question_label == null:
-			for child in qnode.get_children():
-				var found := _find_richtext_in_tree(child)
-				if found:
-					question_label = found
-					break
-
-	# Do NOT auto-connect the QuestionMark here — you said the parent handles it.
-	if has_node("QuestionMark"):
-		question_mark_button = get_node("QuestionMark")
-
-	randomize()
-
-	print("[question_panel] ready — question_label:", question_label, " question_mark_button:", question_mark_button)
-
-	# Uncomment this for quick local testing (auto-start)
-	# start_game(false)
-
 
 func pick_random_question() -> Array:
 	# choose a random index into the questions array
 	current_question_index = randi() % questions.size()
 	return questions[current_question_index]
 
-
-func _find_richtext_in_tree(node: Node) -> RichTextLabel:
-	# Recursively search for a RichTextLabel under `node`.
-	if node is RichTextLabel:
-		return node
-	for child in node.get_children():
-		var found := _find_richtext_in_tree(child)
-		if found:
-			return found
-	return null
-
-
 func start_game(is_imposter: bool = false) -> void:
 	# Called by the game controller when the game starts
 	current_is_imposter = is_imposter
 	pick_random_question()
 	show_question(is_imposter)
-
 
 func show_question(is_imposter: bool = false) -> void:
 	# Display the currently picked question (or pick one if none chosen)
@@ -201,13 +172,29 @@ func show_question(is_imposter: bool = false) -> void:
 	var text: String = pair[1] if is_imposter else pair[0]
 
 	if question_label:
-		question_label.bbcode_text = text
-	else:
-		push_error("RichTextLabel not found at QuestionLabel/RichTextLabel")
+		# enable bbcode and ensure visible
+		question_label.bbcode_enabled = true
+		question_label.visible = true
+
+		# If the control has a tiny size, give it a reasonable minimum so text can show
+		var current_size := Vector2.ZERO
+		if question_label.has_method("get_size"):
+			current_size = question_label.get_size()
+		if current_size.x < 10 or current_size.y < 10:
+			if question_label.has_method("set_custom_minimum_size"):
+				# Compute a responsive minimum size based on the viewport so the
+				# question area scales across screen sizes (adjust the factors
+				# 0.85 and 0.35 to taste).
+				var vp_size: Vector2 = get_viewport().get_visible_rect().size
+				var responsive: Vector2 = vp_size * Vector2(0.65, 0.35)
+				# Clamp to reasonable minimums so tiny windows still work
+				responsive.x = max(responsive.x, 890)
+				responsive.y = max(responsive.y, 390)
+				question_label.set_custom_minimum_size(responsive)
+
+		# Finally set the text. Wrap in BBCode center tags so the text is
+		# horizontally centered inside the RichTextLabel.
+		var centered_text: String = "[center]" + text + "[/center]"
+		question_label.bbcode_text = centered_text
 
 	visible = true
-
-
-func _on_question_mark_pressed() -> void:
-	# Re-show whatever question the user last saw
-	show_question(current_is_imposter)
